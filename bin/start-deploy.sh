@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -u
 set -eo pipefail
 
 if [[ -z "$3" ]] ; then
@@ -11,6 +10,7 @@ fi
 ARCHIVE_LOCATION="$1"
 ENV_FILE="$2"
 
-/prepare-archive.sh "$ARCHIVE_LOCATION" "$ENV_FILE"
+/prepare-archive.sh "$ARCHIVE_LOCATION"
+/prepare-config.sh "$ENV_FILE"
 
 /deploy.sh ${@:3}

@@ -9,7 +9,7 @@ fi
 
 pipenv sync --dev
 
-for GROUP in "$@" ; do
-  echo "Deploy $GROUP"
-  pipenv run stacklift deploy-group -f "$CONFIG_FILE" -g "$GROUP"
+for group in "$@" ; do
+  echo "Deploy $group"
+  pipenv run stacklift deploy-group -f "$CONFIG_FILE" -g "$group"
 done

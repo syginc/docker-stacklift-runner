@@ -12,7 +12,8 @@ ENV_FILE="$2"
 S3_PATH="$3"
 PROJECT_NAME="$4"
 
-/prepare-archive.sh "$ARCHIVE_LOCATION" "$ENV_FILE"
+/prepare-archive.sh "$ARCHIVE_LOCATION"
+/prepare-config.sh "$ENV_FILE"
 
 zip -r - . | aws s3 cp - "$S3_PATH"
 
