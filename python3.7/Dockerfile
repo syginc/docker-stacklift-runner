@@ -1,4 +1,4 @@
-FROM syginc/awscli:3.7
+FROM syginc/awscli:python3.7
 
 ADD bin /
 
