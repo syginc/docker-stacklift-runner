@@ -8,9 +8,11 @@ if [[ -z "$3" ]] ; then
 fi
 
 ARCHIVE_LOCATION="$1"
-ENV_FILE="$2"
+ENV_PATH="$(realpath "$2")"
 
 /prepare-archive.sh "$ARCHIVE_LOCATION"
-/prepare-config.sh "$ENV_FILE"
+/prepare-config.sh "$ENV_PATH"
+
+cd "$ARCHIVE_DIR"
 
 /deploy.sh ${@:3}

@@ -8,14 +8,16 @@ if [[ -z "$2" ]] ; then
 fi
 
 ARCHIVE_LOCATION="$1"
-ENV_DIR="${2%/}"
+ENV_DIR="$(realpath "$2")"
 
 /prepare-archive.sh "$ARCHIVE_LOCATION"
 
-CONFIG_DIR=$(mktemp -d)
+cd "$ARCHIVE_DIR"
+
+CONFIG_DIR="$(mktemp -d)"
 
 for file in "$ENV_DIR"/*.yaml ; do
-  pipenv run emrichen -f "$file" -o "$CONFIG_DIR/$(basename "$file")" "$CONFIG_IN_FILE"
+  pipenv run emrichen -f "$file" -o "$CONFIG_DIR/$(basename "$file")" config.in.yaml
 done
 
 pipenv run stacklift validate-configs -m . "$CONFIG_DIR"/*.yaml
