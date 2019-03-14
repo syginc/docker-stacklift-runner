@@ -2,14 +2,14 @@
 
 set -eo pipefail
 
-if [[ -z "$1" ]] ; then
-  echo "usage: $0 <group1> [<group2> ...]"
+if [[ -z "$2" ]] ; then
+  echo "usage: $0 <config_file> <group1> [<group2> ...]"
   exit 1
 fi
 
-pipenv sync --dev
+CONFIG_FILE="$1"
 
-for group in "$@" ; do
+for group in ${@:2} ; do
   echo ">> Deploy $group"
-  pipenv run stacklift deploy-group -f config.yaml -g "$group"
+  stacklift deploy-group -f "$CONFIG_FILE" -g "$group"
 done

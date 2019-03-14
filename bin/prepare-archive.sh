@@ -9,18 +9,12 @@ fi
 
 ARCHIVE_LOCATION="$1"
 
-cd "$ARCHIVE_DIR"
-
-if [[ -e .stacklift.ready ]] ; then
+if [[ -e "$MODULE_DIR/config.in.yaml" ]] ; then
     exit 0
 fi
 
 if [[ "$ARCHIVE_LOCATION" == s3://* ]] ; then
-  aws s3 cp "$ARCHIVE_LOCATION" - | tar xz
+  aws s3 cp "$ARCHIVE_LOCATION" - | tar xzf - -C "$MODULE_DIR"
 else
-  tar xzf "$ARCHIVE_LOCATION"
+  tar xzf "$ARCHIVE_LOCATION" -C "$MODULE_DIR"
 fi
-
-pipenv sync --dev
-
-touch .stacklift.ready

@@ -7,9 +7,9 @@ if [[ -z "$1" ]] ; then
   exit 1
 fi
 
-ENV_PATH="$1"
+ENV_PATH="$(realpath "$1")"
 
-cd "$ARCHIVE_DIR"
+cd "$MODULE_DIR"
 
-pipenv run emrichen -f "$ENV_PATH" -o config.yaml config.in.yaml
-pipenv run stacklift validate-configs -m . config.yaml
+emrichen -f "$ENV_PATH" -o config.yaml config.in.yaml
+stacklift validate-configs -m . config.yaml

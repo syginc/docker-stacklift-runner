@@ -1,12 +1,12 @@
 FROM syginc/awscli:python3.7
 
-ADD bin /
-
 RUN apt-get update && \
     apt-get install -y zip && \
-    pip install --no-cache-dir --upgrade yq && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir --upgrade yq stacklift==0.0.6 emrichen==0.2.0
 
-ENV ARCHIVE_DIR="/work"
+ADD bin /
+
+ENV MODULE_DIR="/work"
 
 WORKDIR /work

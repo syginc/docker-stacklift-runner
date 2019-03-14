@@ -8,14 +8,14 @@ if [[ -z "$4" ]] ; then
 fi
 
 ARCHIVE_LOCATION="$1"
-ENV_PATH="$(realpath "$2")"
+ENV_PATH="$2"
 S3_PATH="$3"
 PROJECT_NAME="$4"
 
 /prepare-archive.sh "$ARCHIVE_LOCATION"
 /prepare-config.sh "$ENV_PATH"
 
-cd "$ARCHIVE_DIR"
+cd "$MODULE_DIR"
 
 zip -r - . | aws s3 cp - "$S3_PATH"
 
