@@ -15,7 +15,7 @@ ENV_DIR="$2"
 OUT_DIR="$(mktemp -d)"
 
 for file in "$ENV_DIR"/*.yaml ; do
-  emrichen -f "$file" -o "$OUT_DIR/$(basename "$file")" "$MODULE_DIR/config.in.yaml"
+  emrichen --include-env -f "$file" -o "$OUT_DIR/$(basename "$file")" "$MODULE_DIR/config.in.yaml"
 done
 
 stacklift validate-configs -m "$MODULE_DIR" "$OUT_DIR"/*.yaml
