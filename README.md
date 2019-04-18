@@ -16,7 +16,7 @@ Stacklift config template file location is `/work/config.in.yaml`.
 $ /validate-configs.sh <archive_location> <config_dir>
 ```
 
-### Validate emrichen envirionment files
+### Validate emrichen environment files
 
 ```
 $ /validate-envs.sh <archive_location> <env_dir>
@@ -31,5 +31,5 @@ $ /start-deploy.sh <archive_location> <env_file> <group1> [<group2> ...]
 ### Deploy via codebuild
 
 ```
-$ /start-codebuild.sh <archive_location> <env_name> <s3_path> <project_name> [<codebuild_param> ...]
+$ /start-codebuild.sh <archive_location> <env_file> <s3_path> <project_name> [<codebuild_param> ...]
 ```
