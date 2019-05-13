@@ -11,5 +11,6 @@ ENV_PATH="$(realpath "$1")"
 
 cd "$MODULE_DIR"
 
-emrichen --include-env -f "$ENV_PATH" -o config.yaml config.in.yaml
+cp "$ENV_PATH" env.yaml
+emrichen --include-env -f env.yaml -o config.yaml config.in.yaml
 stacklift validate-configs -m . config.yaml
