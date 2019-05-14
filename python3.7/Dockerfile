@@ -7,6 +7,7 @@ RUN apt-get update && \
 
 ADD bin /
 
-ENV MODULE_DIR="/work"
+ENV MODULE_DIR="/work" \
+    MODULE_OVERWRITE_DIR="/overwrite"
 
 WORKDIR /work

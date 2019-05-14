@@ -10,11 +10,15 @@ fi
 ARCHIVE_LOCATION="$1"
 
 if [[ -e "$MODULE_DIR/config.in.yaml" ]] ; then
-    exit 0
+  exit 0
 fi
 
 if [[ "$ARCHIVE_LOCATION" == s3://* ]] ; then
   aws s3 cp "$ARCHIVE_LOCATION" - | tar xzf - -C "$MODULE_DIR"
 else
   tar xzf "$ARCHIVE_LOCATION" -C "$MODULE_DIR"
+fi
+
+if [[ -e "$MODULE_OVERWRITE_DIR" ]] ; then
+  cp -pr "$(realpath "$MODULE_OVERWRITE_DIR")/." "$MODULE_DIR"
 fi
