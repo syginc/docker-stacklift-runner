@@ -3,7 +3,7 @@ FROM syginc/awscli:python3.7
 RUN apt-get update && \
     apt-get install -y zip && \
     rm -rf /var/lib/apt/lists/* && \
-    pip install --no-cache-dir --upgrade yq stacklift==0.0.6 emrichen==0.2.0
+    pip install --no-cache-dir --upgrade yq stacklift==0.0.10 emrichen==0.2.0
 
 ADD bin /
 
