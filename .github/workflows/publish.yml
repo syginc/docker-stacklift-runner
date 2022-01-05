@@ -1,0 +1,37 @@
+name: Create and publish a Docker image
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'bin/**'
+      - 'python3.7/**'
+      - '.github/workflows/**'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: stacklift-runner
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: python3.7/Dockerfile
+          push: true
+          tags: ${{env.REGISTRY}}/${{ github.repository_owner }}/${{env.IMAGE_NAME}}:python3.7
