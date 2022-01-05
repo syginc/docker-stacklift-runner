@@ -1,4 +1,4 @@
-FROM syginc/awscli:python3.7
+FROM ghcr.io/syginc/awscli:python3.7
 
 RUN apt-get update && \
     apt-get install -y zip && \
