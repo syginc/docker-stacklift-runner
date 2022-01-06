@@ -7,7 +7,6 @@ on:
     paths:
       - 'bin/**'
       - 'python3.7/**'
-      - '.github/workflows/**'
 
 env:
   REGISTRY: ghcr.io
